@@ -5,10 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:views="clr-namespace:FlightSimulator.Views"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800">
+        mc:Ignorable="d" Height="550" Width="800" FontFamily="Comic Sans MS"
+        Background="#262626" Title="FlightGear Simulator">
+    <Window.Resources>
+       
+    </Window.Resources>
     <Grid>
-        <views:Settings Background="Black"/>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="45*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Hilla and Jenny Simulator :)" Grid.Row="0" Grid.ColumnSpan="2" FontSize="30" Foreground="#00a3cc" HorizontalAlignment="Center"/>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
+                <Button Content="Connect" Margin="0,5,20,5" Command="{Binding ClickConnectCommand}"/>
+                <Button Content="Settings" Margin="20,5,0,5" Command="{Binding ClickSettingsCommand}"/>
+            </StackPanel>
+            <views:FlightBoard Grid.Row="1" />
+        </Grid>
+        <TabControl Grid.Column="1" Grid.Row="1" Background="#262626" Margin="20,0,0,0">
+            <TabItem Header="Manual">
+                <views:Joystick/>
+            </TabItem>
+            <TabItem Header="Auto Pilot">
+                <views:AutoPilot/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
