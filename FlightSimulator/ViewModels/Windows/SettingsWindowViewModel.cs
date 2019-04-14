@@ -47,9 +47,7 @@ namespace FlightSimulator.ViewModels.Windows
                 model.FlightInfoPort = value;
                 NotifyPropertyChanged("FlightInfoPort");
             }
-        }
-
-     
+        }     
 
         public void SaveSettings()
         {
