@@ -32,6 +32,7 @@ namespace FlightSimulator.Views
             viewModel = new FlightBoardViewModel();
             InitializeComponent();
             this.DataContext = viewModel;
+            viewModel.PropertyChanged += Vm_PropertyChanged;
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)

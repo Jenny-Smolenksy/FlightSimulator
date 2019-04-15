@@ -15,26 +15,25 @@ namespace FlightSimulator.ViewModels
         public FlightBoardViewModel()
         {
             model = FlightBoardModel.Instance;
+            model.changedParamsEvent += ChangedParams;
         }
-        private double _lon;
+
+        private void ChangedParams()
+        {
+            NotifyPropertyChanged("Lon");
+            NotifyPropertyChanged("Lat");
+        }
+
         public double Lon
         {
-            get { return model.Lon; }
-            set
-            {
-                model.Lon = value;
-                NotifyPropertyChanged("Lon");
+            get {
+                return model.Lon;
             }
         }
 
         public double Lat
         {
             get { return model.Lat; }
-            set
-            {
-                model.Lat = value;
-                NotifyPropertyChanged("Lat");
-            }
         }
     }
 }

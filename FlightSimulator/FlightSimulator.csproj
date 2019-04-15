@@ -91,7 +91,8 @@
     <Compile Include="Model\FlightBoardModel.cs" />
     <Compile Include="Model\Interface\IClientHandler.cs" />
     <Compile Include="Model\Interface\ISettingsModel.cs" />
-    <Compile Include="Model\Socket\ClientHandler.cs" />
+    <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\Socket\SimulatorClientHandler.cs" />
     <Compile Include="Model\Socket\TcpClientSimulator.cs" />
     <Compile Include="Model\Socket\TcpServer.cs" />
     <Compile Include="ViewModels\AutoPilotViewModel.cs" />

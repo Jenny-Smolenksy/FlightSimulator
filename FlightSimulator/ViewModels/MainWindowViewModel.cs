@@ -11,6 +11,14 @@ namespace FlightSimulator.ViewModels
     public class MainWindowViewModel : BaseNotify
     {
         private Settings settingsWindow;
+        private MainModel model;
+
+        public MainWindowViewModel()
+        {
+            this.model = MainModel.Instance;
+            model.StartServer();
+        }
+
         #region Commands
         #region ClickCommand
         private System.Windows.Input.ICommand _clickSettingsCommand;

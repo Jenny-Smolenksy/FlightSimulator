@@ -12,18 +12,17 @@ namespace FlightSimulator.Model.Socket
     public class TcpServer
     {
         private TcpListener listener;
-        private List<ClientHandler> clientsList;
+        private List<SimulatorClientHandler> clientsList;
         public TcpServer(int port)
         {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             listener = new TcpListener(ep);
             //opening server
             listener.Start();
-            clientsList = new List<ClientHandler>();
-            StartClientsListening();
+            clientsList = new List<SimulatorClientHandler>();
         }
 
-        private void StartClientsListening()
+        public void StartClientsListening(SimulatorClientHandler.ParamsChanged paramsChangedDel)
         {
             Thread thread = new Thread(() => {
                 while (true)
@@ -32,7 +31,8 @@ namespace FlightSimulator.Model.Socket
                     {
                         TcpClient client = listener.AcceptTcpClient();
 
-                        ClientHandler clientHandler = new ClientHandler();
+                        SimulatorClientHandler clientHandler = new SimulatorClientHandler();
+                        clientHandler._onParamsChanged += paramsChangedDel;
                         clientsList.Add(clientHandler);
                         clientHandler.HandleClient(client);
                     }

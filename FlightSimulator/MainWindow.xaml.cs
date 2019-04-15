@@ -27,6 +27,7 @@ namespace FlightSimulator
             this.DataContext = viewModel;
             InitializeComponent();
 
+
         }
 
     }
