@@ -46,7 +46,9 @@ namespace FlightSimulator.Model.Socket
             thread.Start();
         }
 
-        ~TcpServer()
+
+
+        public void StopListening()
         {
             listener.Stop();
         }

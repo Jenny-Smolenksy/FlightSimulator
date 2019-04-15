@@ -16,7 +16,6 @@ namespace FlightSimulator.ViewModels
         public MainWindowViewModel()
         {
             this.model = MainModel.Instance;
-            model.StartServer();
         }
 
         #region Commands
@@ -48,6 +47,7 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnectCommand()
         {
+            model.Connect();
         }
 
         private System.Windows.Input.ICommand _clickExitCommand;
@@ -66,6 +66,7 @@ namespace FlightSimulator.ViewModels
             {
                 settingsWindow.Close();
             }
+            model.DisConnect();
         }
 
         #endregion
