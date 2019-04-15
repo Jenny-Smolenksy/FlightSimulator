@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 
 namespace FlightSimulator.Views
 {
@@ -15,10 +16,11 @@ namespace FlightSimulator.Views
         {
             if((bool)value == true)
             {
-                return Brushes.Purple;
+                return new System.Windows.Media.SolidColorBrush(Colors.White);
+
             } else
             {
-                return Brushes.Red;
+                return new System.Windows.Media.SolidColorBrush(Colors.Salmon);
             }
         }
 

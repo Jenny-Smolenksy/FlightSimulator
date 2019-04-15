@@ -10,10 +10,11 @@
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="75*"/>
+            <RowDefinition Height="75*" />
             <RowDefinition Height="15*"/>
         </Grid.RowDefinitions>
-        <TextBox x:Name="TextBox" Text="{Binding Text}" HorizontalAlignment="Stretch" Grid.Row="0" Background="{Binding IsSent, Converter={StaticResource BooleanToBackgroundConverter}}"/>
+        <TextBox x:Name="TextBox" Text="{Binding Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch" Grid.Row="0" 
+                 Background="{Binding IsSent, Converter={StaticResource BooleanToBackgroundConverter}, UpdateSourceTrigger=PropertyChanged}" />
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1" Margin="0,20,0,0">
             <Button Content="Ok" Margin="0,5,20,5" Command="{Binding ClickOkCommand}" />
             <Button Content="Clear" Margin="20,5,0,5" Command="{Binding ClearCommand}" />

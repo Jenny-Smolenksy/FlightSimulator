@@ -16,22 +16,36 @@ namespace FlightSimulator.ViewModels
             IsSent = false;
         }
 
+        private bool _isSent;
         public bool IsSent
         {
-            get;
-            private set;
-        }
-
-        public string Text
-        {
-            set
+            get { return _isSent; }
+            private set
             {
-                //NotifyPropertyChanged("FlightServerIP");
-                IsSent = false;
+                _isSent = value;
+                NotifyPropertyChanged("IsSent");
             }
         }
 
-        
+        private string _text;
+        public string Text
+        {
+            get
+            {
+                return _text;
+            }
+            set
+            {
+                _text = value;
+                NotifyPropertyChanged("Text");
+                if(value != "")
+                {
+                    IsSent = false;
+                }
+            }
+        }
+
+
         private void ClearText()
         {
             Text = "";
