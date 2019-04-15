@@ -8,7 +8,16 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="550" Width="800">
     <Grid>
-        <views:Settings Background="Black"/>
-        
+        <views:manual Background="Black" RenderTransformOrigin="0.5,0.5" Margin="-3,0,-0.4,-2.2">
+            <views:manual.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="0.04"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </views:manual.RenderTransform>
+        </views:manual>
+
     </Grid>
 </Window>

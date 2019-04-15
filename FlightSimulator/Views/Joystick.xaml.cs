@@ -22,6 +22,7 @@ namespace FlightSimulator.Views
     /// </summary>
     public partial class Joystick : UserControl
     {
+
         /// <summary>Current Aileron</summary>
         public static readonly DependencyProperty AileronProperty =
             DependencyProperty.Register("Aileron", typeof(double), typeof(Joystick),null);
