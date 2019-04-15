@@ -1,4 +1,5 @@
 ﻿using FlightSimulator.Model.EventArgs;
+using FlightSimulator.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +11,11 @@ namespace FlightSimulator.ViewModels
 {
       public class ManualViewModel:BaseNotify
     {
+        private ManualModel model;
     
         public ManualViewModel()
         {
-           
+            model = ManualModel.Instance;  
         }
 
         public double Throttle
@@ -47,15 +49,6 @@ namespace FlightSimulator.ViewModels
         }
 
         
-        
-        private ICommand _cancelCommand; //change name
-        public ICommand CancelCommand
-        {
-            get
-            {
-                return _cancelCommand ?? (_cancelCommand = new Model.CommandHandler(() => OnChangedJoystick()));
-            }
-        }
         private void OnChangedJoystick()
         {
            // model.ReloadSettings();
