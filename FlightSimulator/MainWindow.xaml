@@ -5,19 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:views="clr-namespace:FlightSimulator.Views"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="800">
-    <Grid>
-        <views:manual Background="Black" RenderTransformOrigin="0.5,0.5" Margin="-3,0,-0.4,-2.2">
-            <views:manual.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="0.04"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </views:manual.RenderTransform>
-        </views:manual>
+        mc:Ignorable="d" Height="550" Width="800" FontFamily="Comic Sans MS"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+        Background="#262626" Title="FlightGear Simulator" >
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ClickExitCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Width" Value="55"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="#007099"/>
+            <Setter Property="BorderBrush" Value="Beige"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="55*"/>
+            <ColumnDefinition Width="45*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Hilla and Jenny Simulator :)" Grid.Row="0" Grid.ColumnSpan="2" FontSize="30" Foreground="#00a3cc" HorizontalAlignment="Center"/>
+        <Grid Grid.Column="0" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="90*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
+                <Button Content="Connect" Margin="0,5,20,5" Command="{Binding ClickConnectCommand}"/>
+                <Button Content="Settings" Margin="20,5,0,5" Command="{Binding ClickSettingsCommand}"/>
+            </StackPanel>
+            <views:FlightBoard Grid.Row="1" />
+        </Grid>
+        <TabControl Grid.Column="1" Grid.Row="1" Background="#262626" Margin="20,0,0,0">
+            <TabItem Header="Manual">
+                <views:Joystick/>
+            </TabItem>
+            <TabItem Header="Auto Pilot">
+                <views:AutoPilot/>
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
