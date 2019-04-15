@@ -10,7 +10,7 @@ namespace FlightSimulator.ViewModels
 {
     public class MainWindowViewModel : BaseNotify
     {
-
+        private Settings settingsWindow;
         #region Commands
         #region ClickCommand
         private System.Windows.Input.ICommand _clickSettingsCommand;
@@ -24,7 +24,7 @@ namespace FlightSimulator.ViewModels
         }
         private void OnSettingsClick()
         {
-            Settings settingsWindow = new Settings();
+            settingsWindow = new Settings();
             settingsWindow.Show();
         }
         #endregion
@@ -40,6 +40,23 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnectCommand()
         {
+        }
+
+        private System.Windows.Input.ICommand _clickExitCommand;
+        public System.Windows.Input.ICommand ClickExitCommand
+        {
+            get
+            {
+                return _clickExitCommand ??
+                    (_clickExitCommand = new CommandHandler(() => OnExitCommand()));
+            }
+        }
+        private void OnExitCommand()
+        {
+            if(settingsWindow.Visibility == System.Windows.Visibility.Visible)
+            {
+                settingsWindow.Close();
+            }
         }
 
         #endregion
