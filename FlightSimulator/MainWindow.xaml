@@ -46,7 +46,7 @@
         </Grid>
         <TabControl Grid.Column="1" Grid.Row="1" Background="#262626" Margin="20,0,0,0">
             <TabItem Header="Manual">
-                <views:Joystick/>
+                <views:manual/>
             </TabItem>
             <TabItem Header="Auto Pilot">
                 <views:AutoPilot/>

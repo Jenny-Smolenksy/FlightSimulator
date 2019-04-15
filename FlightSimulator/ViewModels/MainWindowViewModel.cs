@@ -61,7 +61,8 @@ namespace FlightSimulator.ViewModels
         }
         private void OnExitCommand()
         {
-            if(settingsWindow.Visibility == System.Windows.Visibility.Visible)
+            if(settingsWindow != null &&
+                settingsWindow.Visibility == System.Windows.Visibility.Visible)
             {
                 settingsWindow.Close();
             }

@@ -31,7 +31,7 @@ namespace FlightSimulator.Model.Socket
                 int result = reader.ReadInt32();
                 Console.WriteLine("Result = {0}", result);
             }
-    **/
+          **/
         }
 
         ~TcpClientSimulator()

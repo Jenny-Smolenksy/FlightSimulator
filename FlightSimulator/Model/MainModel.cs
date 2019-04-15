@@ -24,6 +24,7 @@ namespace FlightSimulator.Model
         }
         #endregion
 
+
         public void StartServer()
         {
             TcpServer server = new TcpServer(7777);

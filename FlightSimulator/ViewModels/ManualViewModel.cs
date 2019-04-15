@@ -8,7 +8,7 @@ using System.Windows.Input;
 
 namespace FlightSimulator.ViewModels
 {
-      public class ManualViewModel:BaseNotify
+    public class ManualViewModel:BaseNotify
     {
     
         public ManualViewModel()
@@ -44,9 +44,7 @@ namespace FlightSimulator.ViewModels
                 // model.FlightCommandPort = value;
                 NotifyPropertyChanged("Aieleron");
             }
-        }
-
-        
+        }        
         
         private ICommand _cancelCommand; //change name
         public ICommand CancelCommand
