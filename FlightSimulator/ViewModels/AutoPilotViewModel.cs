@@ -9,10 +9,11 @@ using System.Windows.Input;
 namespace FlightSimulator.ViewModels
 {
     class AutoPilotViewModel : BaseNotify
-    {        
-
+    {
+        private AutoPilotModel model;
         public AutoPilotViewModel()
         {
+            model = AutoPilotModel.Instance;
             IsSent = false;
         }
 
@@ -54,6 +55,8 @@ namespace FlightSimulator.ViewModels
         private void SendText()
         {
             IsSent = true;
+            //go thought the lines, send each line alone
+            model.SendMessage(Text);
         }
 
         #region Commands

@@ -25,8 +25,9 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="90*"/>
+            <RowDefinition Height="7*"/>
+            <RowDefinition Height="88*"/>
+            <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="55*"/>
@@ -52,5 +53,8 @@
                 <views:AutoPilot/>
             </TabItem>
         </TabControl>
+        <StackPanel Grid.Row="2" Background="#252930" HorizontalAlignment="Stretch" Margin="0,4,0,0" Grid.ColumnSpan="2">
+        <TextBlock x:Name="Info" Text="{Binding Info}"  Foreground="White" HorizontalAlignment="Center" />
+        </StackPanel>
     </Grid>
 </Window>

@@ -12,10 +12,29 @@ namespace FlightSimulator.ViewModels
     {
         private Settings settingsWindow;
         private MainModel model;
+        
 
         public MainWindowViewModel()
         {
             this.model = MainModel.Instance;
+            model.onUserMessage += OnUserMessageRecived;
+            _info = "welcome to out simulator, set settings and press ok to connect..";
+        }
+
+        private void OnUserMessageRecived(string message)
+        {
+            Info = message;
+        }
+
+        private string _info;
+        public string Info
+        {
+            get { return _info; }
+            set
+            {
+                _info = value;
+                NotifyPropertyChanged("Info");
+            }
         }
 
         #region Commands
@@ -48,6 +67,7 @@ namespace FlightSimulator.ViewModels
         private void OnConnectCommand()
         {
             model.Connect();
+            Info = "Connecting..";
         }
 
         private System.Windows.Input.ICommand _clickExitCommand;
