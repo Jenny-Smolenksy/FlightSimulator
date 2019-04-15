@@ -1,4 +1,5 @@
 ﻿using FlightSimulator.Model.EventArgs;
+using FlightSimulator.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,19 +45,11 @@ namespace FlightSimulator.ViewModels
                 // model.FlightCommandPort = value;
                 NotifyPropertyChanged("Aieleron");
             }
-        }        
-        
-        private ICommand _cancelCommand; //change name
-        public ICommand CancelCommand
-        {
-            get
-            {
-                return _cancelCommand ?? (_cancelCommand = new Model.CommandHandler(() => OnChangedJoystick()));
-            }
         }
-        private void OnChangedJoystick()
+
+        private void Joystick_Moved(Joystick sender, Model.EventArgs.VirtualJoystickEventArgs args)
         {
-           // model.ReloadSettings();
+            
         }
     }
 }

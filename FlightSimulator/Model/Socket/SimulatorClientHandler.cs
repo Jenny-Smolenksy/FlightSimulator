@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using static FlightSimulator.Model.Socket.TcpServer;
 
 namespace FlightSimulator.Model.Socket
 {
@@ -13,6 +14,7 @@ namespace FlightSimulator.Model.Socket
     {
         public delegate void ParamsChanged(double lon, double lat);
         public event ParamsChanged _onParamsChanged;
+        public event ClientDisconnected clientDisconnected;
 
         public void HandleClient(TcpClient client)
         {
@@ -23,9 +25,7 @@ namespace FlightSimulator.Model.Socket
                 {
                     string inputLine;
                     while (client.Connected)
-                    {
-                        //		commandLine	"0.000000,394.065674,1.193444,12.000000,40.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,260.564117,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000,0.000000"	string
-
+                    { 
                         inputLine = reader.ReadLine();
                         string[] values = inputLine.Split(',');
                         double lon = Convert.ToDouble(values[0]);
@@ -35,6 +35,8 @@ namespace FlightSimulator.Model.Socket
                         //Console.WriteLine("Got command: {0}", commandLine);
                         //split by generic and send lat and lon to flight board
                     }
+                    clientDisconnected?.Invoke();
+
                 }
                 
                 //client.Close();
