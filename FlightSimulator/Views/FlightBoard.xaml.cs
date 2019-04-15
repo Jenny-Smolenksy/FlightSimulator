@@ -49,7 +49,8 @@ namespace FlightSimulator.Views
             if(e.PropertyName.Equals("Lat") || e.PropertyName.Equals("Lon"))
             {
                 Point p1 = new Point(0,0);            // Fill here!
-                planeLocations.AppendAsync(Dispatcher, p1);
+                Point p2 = new Point(viewModel.Lat, viewModel.Lon);
+                planeLocations.AppendAsync(Dispatcher, p2);
             }
         }
 

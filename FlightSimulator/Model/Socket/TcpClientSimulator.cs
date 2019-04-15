@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
@@ -16,25 +17,25 @@ namespace FlightSimulator.Model.Socket
         {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(serverIp), port);
             client = new TcpClient();
-            client.Connect(ep);
-
-            /**
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryReader reader = new BinaryReader(stream))
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            try
             {
-                // Send data to server
-                Console.Write("Please enter a number: ");
-                int num = int.Parse(Console.ReadLine());
-                writer.Write(num);
-                // Get result from server
-                int result = reader.ReadInt32();
-                Console.WriteLine("Result = {0}", result);
+                client.Connect(ep);
+            } catch(SocketException ex)
+            {
+
             }
-    **/
         }
 
-        ~TcpClientSimulator()
+        public void SendMessage(string message)
+        {
+            using (NetworkStream stream = client.GetStream())
+            using (BinaryWriter writer = new BinaryWriter(stream))
+            {
+                writer.Write(message);
+            }
+        }
+
+        public void CloseClient()
         {
             client.Close();
         }

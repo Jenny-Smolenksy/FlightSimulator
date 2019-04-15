@@ -39,9 +39,9 @@
         <TextBlock Text="Flight Server Ip:" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource textBlockStyle}" />
         <TextBox x:Name="FlightServerIP" Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Text="{Binding FlightServerIP}" Style="{StaticResource textBoxStyle}"/>
         <TextBlock Text="Flight Info Port:" Grid.Row="1" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource textBlockStyle}"/>
-        <TextBox x:Name="FlightCommandPort" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center" Text="{Binding FlightCommandPort}" Style="{StaticResource textBoxStyle}"/>
+        <TextBox x:Name="FlightCommandPort" Grid.Column="1" Grid.Row="2" VerticalAlignment="Center" Text="{Binding FlightCommandPort}" Style="{StaticResource textBoxStyle}"/>
         <TextBlock Text="Flight Command Port:" Grid.Row="2" Grid.Column="0"  HorizontalAlignment="Left" VerticalAlignment="Center" Style="{StaticResource textBlockStyle}"/>
-        <TextBox x:Name="FlightInfoPort" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Text="{Binding FlightInfoPort}" Style="{StaticResource textBoxStyle}" />
+        <TextBox x:Name="FlightInfoPort" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Center"  Text="{Binding FlightInfoPort}" Style="{StaticResource textBoxStyle}" />
         <Button Content="OK" Background="#007099" Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" Margin="0,0,20,0"  VerticalAlignment="Center"  Foreground="Black"  Width="70" Height="35"  Command="{Binding ClickCommand}"/>
         <Button Content="Cancel" Background="#007099"  Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Center"  Foreground="Black" Width="70" Height="35" Command="{Binding CancelCommand}"/>
     </Grid>
