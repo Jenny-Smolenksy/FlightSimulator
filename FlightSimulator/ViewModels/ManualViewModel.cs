@@ -26,7 +26,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 NotifyPropertyChanged("Throttle");
-                model.SendValueMessage(buildMsg("throttle", value));
+                model.SendValueMessage(buildMsg("controls/engines/current-engine/throttle", value));
             }
         }
 
@@ -36,7 +36,7 @@ namespace FlightSimulator.ViewModels
             set
             {
                 NotifyPropertyChanged("Rudder");
-                model.SendValueMessage(buildMsg("rudder", value));
+                model.SendValueMessage(buildMsg("controls/flight/rudder", value));
             }
         }
 
@@ -45,15 +45,15 @@ namespace FlightSimulator.ViewModels
 
         public void Joystick_Moved(Joystick sender, Model.EventArgs.VirtualJoystickEventArgs args)
         {
-            model.SendValueMessage(buildMsg("aileron",args.Aileron));
+            model.SendValueMessage(buildMsg("controls/flight/aileron", args.Aileron));
            
-            model.SendValueMessage(buildMsg("elevator",args.Elevator));
+            model.SendValueMessage(buildMsg("controls/flight/elevator", args.Elevator));
         }
 
         private string buildMsg(string arg, double val)
         {
-            string msg = "set controls/flight/";
-            return msg + arg + val;
+            string msg = "set ";
+            return  msg +arg +" "+ val;
            
 
         }
