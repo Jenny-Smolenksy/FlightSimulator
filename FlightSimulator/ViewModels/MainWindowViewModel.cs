@@ -19,6 +19,8 @@ namespace FlightSimulator.ViewModels
             this.model = MainModel.Instance;
             model.onUserMessage += OnUserMessageRecived;
             _info = "welcome to out simulator, set settings and press ok to connect..";
+           
+
         }
 
         private void OnUserMessageRecived(string message)
@@ -52,10 +54,13 @@ namespace FlightSimulator.ViewModels
         {
             settingsWindow = new Settings();
             settingsWindow.Show();
+            
+          
         }
         #endregion
 
         private System.Windows.Input.ICommand _clickConnectCommand;
+       
         public System.Windows.Input.ICommand ClickConnectCommand
         {
             get
@@ -70,6 +75,7 @@ namespace FlightSimulator.ViewModels
             Info = "Connecting..";
         }
 
+        
         private System.Windows.Input.ICommand _clickExitCommand;
         public System.Windows.Input.ICommand ClickExitCommand
         {
@@ -79,6 +85,7 @@ namespace FlightSimulator.ViewModels
                     (_clickExitCommand = new CommandHandler(() => OnExitCommand()));
             }
         }
+    
         private void OnExitCommand()
         {
             if(settingsWindow != null &&
