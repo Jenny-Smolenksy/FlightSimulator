@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+
 namespace FlightSimulator.ViewModels
 {
     public class ManualViewModel:BaseNotify
@@ -21,11 +22,11 @@ namespace FlightSimulator.ViewModels
 
         public double Throttle
         {
-          //  get { }
+           // get { return model.throttle; }
             set
             {
-                model.throttle = value;
                 NotifyPropertyChanged("Throttle");
+                model.SendValueMessage(buildMsg("throttle", value));
             }
         }
 
@@ -34,17 +35,27 @@ namespace FlightSimulator.ViewModels
            // get { return model.FlightCommandPort; }
             set
             {
-                model.rudder = value;
                 NotifyPropertyChanged("Rudder");
+                model.SendValueMessage(buildMsg("rudder", value));
             }
         }
+
 
       
 
         public void Joystick_Moved(Joystick sender, Model.EventArgs.VirtualJoystickEventArgs args)
         {
-            model.aileron = args.Aileron;
-            model.elevator = args.Elevator;
+            model.SendValueMessage(buildMsg("aileron",args.Aileron));
+           
+            model.SendValueMessage(buildMsg("elevator",args.Elevator));
+        }
+
+        private string buildMsg(string arg, double val)
+        {
+            string msg = "set controls/flight/";
+            return msg + arg + val;
+           
+
         }
     }
 }

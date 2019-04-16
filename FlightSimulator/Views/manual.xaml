@@ -17,15 +17,15 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="10*"/>
-            <ColumnDefinition Width="80*"/>
-            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="75*"/>
+            <ColumnDefinition Width="10*"/>
             <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
 
 
         <local:Joystick  x:Name="Joystick" Grid.Column="1" Grid.Row="1" />
         <TextBlock Text=" &#x2b05;  aileron  &#x2b95;" Grid.Row="0"  Grid.ColumnSpan="2" HorizontalAlignment="Center"/>
-        <TextBlock Grid.Row="0" Text="{Binding ElementName=Joystick, Path=Aileron, StringFormat=N1}" FontSize="20" HorizontalAlignment="Left" Grid.Column="2"/>
+        <TextBlock Grid.Row="0" Text="{Binding ElementName=Joystick, Path=Aileron, StringFormat=N1}" FontSize="20" HorizontalAlignment="Center" Grid.Column="2"/>
             
         <TextBlock Text="&#x2b05;  elevator  &#x2b95;" HorizontalAlignment="Center" VerticalAlignment="Center"  FontSize="30" Grid.Column="3" Grid.Row="1" >
             <TextBlock.LayoutTransform>
@@ -44,12 +44,12 @@
 
 
 
-        <TextBlock Text="&#x2b05;  throttle  &#x2b95;" HorizontalAlignment="Center" VerticalAlignment="Center"  Grid.Column="0" Grid.Row="1" >
+        <TextBlock Text="&#x2b05;  throttle  &#x2b95;" HorizontalAlignment="Left" VerticalAlignment="Center"  Grid.Column="1" Grid.Row="1" >
             <TextBlock.LayoutTransform>
                 <RotateTransform Angle="90"></RotateTransform>
             </TextBlock.LayoutTransform>
         </TextBlock>
-        <Slider x:Name="throttle"  Minimum="-1" Maximum="1" Value="{Binding Throttle}" Width="300" HorizontalAlignment="Left" Orientation="Vertical" TickPlacement="TopLeft" TickFrequency="0.1" Grid.Column="1" Grid.Row="1" ></Slider>
+        <Slider x:Name="throttle"  Minimum="-1" Maximum="1" Value="{Binding Throttle}" Width="300" HorizontalAlignment="Left" Orientation="Vertical" TickPlacement="TopLeft" TickFrequency="0.1" Grid.Column="0" Grid.Row="1" ></Slider>
         <TextBlock Grid.Row="1" Text="{Binding ElementName=throttle, Path=Value, StringFormat=N1 }"  FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Top" Grid.Column="0">
             <TextBlock.LayoutTransform>
                 <RotateTransform Angle="90"></RotateTransform>

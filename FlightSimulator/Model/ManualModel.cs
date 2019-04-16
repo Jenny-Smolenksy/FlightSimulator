@@ -8,10 +8,9 @@ namespace FlightSimulator.Model
 {
     class ManualModel
     {
-        public double rudder { get; set; }
-        public double throttle { get; set; }
-        public double aileron;// { get; set; }
-        public double elevator;//{ get; set; }
+        public delegate void valueChanged( string msg);
+        public event valueChanged valueChange;
+
 
         #region Singleton
         private static ManualModel m_Instance = null;
@@ -28,6 +27,11 @@ namespace FlightSimulator.Model
         }
         #endregion
 
-        
+        public void SendValueMessage( string msg)
+        {
+            valueChange?.Invoke(msg);
+        }
+
+
     }
 }

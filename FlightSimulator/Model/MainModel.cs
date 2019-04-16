@@ -12,6 +12,7 @@ namespace FlightSimulator.Model
         private TcpClientSimulator tcpClient;
         private TcpServer tcpServer;
         private AutoPilotModel autoPilot;
+        private ManualModel manual;
 
         public delegate void UserMessageChanged(string message);
         public event UserMessageChanged onUserMessage;
@@ -36,7 +37,10 @@ namespace FlightSimulator.Model
             tcpServer = null;
             tcpClient = null;
             autoPilot = AutoPilotModel.Instance;
+            manual = ManualModel.Instance;
             autoPilot.onMessageRequest += OnManualSend;
+            manual.valueChange += OnManualSend;
+
         }
 
 
@@ -86,6 +90,8 @@ namespace FlightSimulator.Model
             tcpClient.SendMessage(message);
         }
 
+      
+   
 
         public void DisConnect()
         {
