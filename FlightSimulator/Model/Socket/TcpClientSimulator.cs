@@ -28,6 +28,7 @@ namespace FlightSimulator.Model.Socket
 
         public void SendMessage(string message)
         {
+            if (client == null) return;
             using (NetworkStream stream = client.GetStream())
             using (BinaryWriter writer = new BinaryWriter(stream))
             {

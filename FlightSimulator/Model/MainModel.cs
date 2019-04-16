@@ -70,7 +70,6 @@ namespace FlightSimulator.Model
 
         private void OnSimulatorDisconnected()
         {
-
             onUserMessage?.Invoke("simulator disconnected");
         }
 
