@@ -31,9 +31,15 @@ namespace FlightSimulator.Views
             this.Joystick.Moved += viewModel.Joystick_Moved;
             
         }
-        
 
+        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
 
+        }
 
+        private void Throttle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+
+        }
     }
 }

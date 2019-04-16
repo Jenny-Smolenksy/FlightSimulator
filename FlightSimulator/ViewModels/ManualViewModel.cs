@@ -22,20 +22,18 @@ namespace FlightSimulator.ViewModels
 
         public double Throttle
         {
-           // get { return model.throttle; }
+       
             set
             {
-                NotifyPropertyChanged("Throttle");
                 model.SendValueMessage(buildMsg("controls/engines/current-engine/throttle", value));
             }
         }
 
         public double Rudder
         {
-           // get { return model.FlightCommandPort; }
+          
             set
             {
-                NotifyPropertyChanged("Rudder");
                 model.SendValueMessage(buildMsg("controls/flight/rudder", value));
             }
         }
