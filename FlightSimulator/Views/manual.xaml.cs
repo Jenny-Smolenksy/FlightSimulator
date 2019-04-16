@@ -28,8 +28,12 @@ namespace FlightSimulator.Views
             InitializeComponent();
             viewModel = new ViewModels.ManualViewModel();
             this.DataContext = viewModel;
-            this.Joystick.Moved += viewModel.JoystickMoved;
+            this.Joystick.Moved += viewModel.Joystick_Moved;
+            
         }
+        
+
+
 
     }
 }

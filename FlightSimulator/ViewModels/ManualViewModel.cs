@@ -11,10 +11,12 @@ namespace FlightSimulator.ViewModels
 {
     public class ManualViewModel:BaseNotify
     {
-    
+
+        private Model.ManualModel model;
         public ManualViewModel()
         {
-           
+            model = Model.ManualModel.Instance;
+
         }
 
         public double Throttle
@@ -22,7 +24,7 @@ namespace FlightSimulator.ViewModels
           //  get { }
             set
             {
-               
+                model.throttle = value;
                 NotifyPropertyChanged("Throttle");
             }
         }
@@ -32,24 +34,17 @@ namespace FlightSimulator.ViewModels
            // get { return model.FlightCommandPort; }
             set
             {
-               // model.FlightCommandPort = value;
+                model.rudder = value;
                 NotifyPropertyChanged("Rudder");
             }
         }
 
-        public double Aieleron
-        {
-            // get { return model.FlightCommandPort; }
-            set
-            {
-                // model.FlightCommandPort = value;
-                NotifyPropertyChanged("Aieleron");
-            }
-        }
+      
 
-        private void Joystick_Moved(Joystick sender, Model.EventArgs.VirtualJoystickEventArgs args)
+        public void Joystick_Moved(Joystick sender, Model.EventArgs.VirtualJoystickEventArgs args)
         {
-            
+            model.aileron = args.Aileron;
+            model.elevator = args.Elevator;
         }
     }
 }

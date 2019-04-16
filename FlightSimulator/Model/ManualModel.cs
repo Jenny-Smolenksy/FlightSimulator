@@ -8,10 +8,10 @@ namespace FlightSimulator.Model
 {
     class ManualModel
     {
-        private double rudder;
-        private double throttle;
-        private double aileron;
-        private double elevator;
+        public double rudder { get; set; }
+        public double throttle { get; set; }
+        public double aileron;// { get; set; }
+        public double elevator;//{ get; set; }
 
         #region Singleton
         private static ManualModel m_Instance = null;
@@ -27,5 +27,7 @@ namespace FlightSimulator.Model
             }
         }
         #endregion
+
+        
     }
 }
