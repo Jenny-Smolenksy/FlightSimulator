@@ -12,15 +12,20 @@ namespace FlightSimulator.ViewModels
     {
         private Settings settingsWindow;
         private MainModel model;
-        
 
         public MainWindowViewModel()
         {
             this.model = MainModel.Instance;
             model.onUserMessage += OnUserMessageRecived;
-            _info = "welcome to out simulator, set settings and press ok to connect..";
+            model.onSettingCloseRequest += SettingCloseRequestHandle;
+            _info = "welcome to flight simulator, set settings and press ok to connect..";
            
 
+        }
+
+        private void SettingCloseRequestHandle()
+        {
+            settingsWindow.Close();
         }
 
         private void OnUserMessageRecived(string message)
@@ -71,8 +76,8 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnectCommand()
         {
-            model.Connect();
             Info = "Connecting..";
+            model.Connect();
         }
 
         

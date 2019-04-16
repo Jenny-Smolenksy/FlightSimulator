@@ -8,7 +8,7 @@ namespace FlightSimulator.Model
 {
     class ManualModel
     {
-        public delegate void valueChanged( string msg);
+        public delegate bool valueChanged( string msg);
         public event valueChanged valueChange;
 
 

@@ -12,9 +12,8 @@ namespace FlightSimulator.Model.Socket
 {
     public class SimulatorClientHandler : IClientHandler
     {
-        public delegate void ParamsChanged(double lon, double lat);
         public event ParamsChanged _onParamsChanged;
-        public event ClientDisconnected clientDisconnected;
+        public event ServerEvent clientDisconnected;
 
         public void HandleClient(TcpClient client)
         {

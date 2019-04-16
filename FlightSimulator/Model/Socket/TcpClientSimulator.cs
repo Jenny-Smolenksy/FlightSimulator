@@ -12,35 +12,67 @@ namespace FlightSimulator.Model.Socket
     public class TcpClientSimulator
     {
         private TcpClient client;
+        public delegate void OnClientEvent(string message);
+        public event OnClientEvent onClientEvent;
+        
+        public TcpClientSimulator()
+        {
 
-        public TcpClientSimulator(string serverIp, int port)
+        }
+
+        public void Connect(string serverIp, int port)
         {
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse(serverIp), port);
             client = new TcpClient();
             try
             {
                 client.Connect(ep);
-            } catch(SocketException ex)
+                onClientEvent?.Invoke("Conncted to simulator, commands channel");
+            } catch(SocketException)
             {
-
+                onClientEvent?.Invoke("Error Conncted to simulator in commands channel, check port");
             }
         }
 
-        public void SendMessage(string message)
+        public bool SendMessage(string message)
         {
-            if (client == null) return;
-            using (NetworkStream stream = client.GetStream())
-            using (BinaryWriter writer = new BinaryWriter(stream))
+            if (client == null || !client.Connected)
             {
-                writer.Write(message);
+                onClientEvent?.Invoke("socket closed, fail to send command");
+                return false;
+            }
+            try
+            {
+                using (NetworkStream stream = client.GetStream())
+                using (BinaryWriter writer = new BinaryWriter(stream))
+                {
+
+                    writer.Write(message);
+                    onClientEvent?.Invoke("Command succesfully sent to simulator");
+                    return true;
+                }
+            } catch {
+
+                onClientEvent?.Invoke("socket closed, fail to send command");
+                return false;
             }
         }
 
         public void CloseClient()
         {
-            client.Close();
+            if(IsConnected())
+              client.Close();
         }
-        
+
+        public bool IsConnected()
+        {
+            if (client == null)
+                return false;
+            return client.Connected;
+        }
+
+
+
     }
 
     

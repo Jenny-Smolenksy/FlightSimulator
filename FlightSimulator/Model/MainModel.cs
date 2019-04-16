@@ -17,6 +17,9 @@ namespace FlightSimulator.Model
         public delegate void UserMessageChanged(string message);
         public event UserMessageChanged onUserMessage;
 
+        public delegate void onSettingCloseRequestDel();
+        public event onSettingCloseRequestDel onSettingCloseRequest;
+
         #region Singleton
         private static MainModel m_Instance = null;
         public static MainModel Instance
@@ -34,11 +37,20 @@ namespace FlightSimulator.Model
 
         private MainModel()
         {
-            tcpServer = null;
-            tcpClient = null;
+
+            tcpServer = new TcpServer();
+            tcpServer.clientConnected += OnSimulatorConnected;
+            tcpServer.clientDisconnected += OnSimulatorDisconnected;
+            tcpServer.failedToOpen += OnServerFailedToOpen;
+            tcpServer.onClientHandlerParamsChanged += FlightBoardModel.Instance.ParamsChanged;
+
+            tcpClient = new TcpClientSimulator();
+            tcpClient.onClientEvent += OnClientEventHandler;
+
             autoPilot = AutoPilotModel.Instance;
-            manual = ManualModel.Instance;
             autoPilot.onMessageRequest += OnManualSend;
+
+            manual = ManualModel.Instance;
             manual.valueChange += OnManualSend;
 
         }
@@ -46,26 +58,42 @@ namespace FlightSimulator.Model
 
         public void Connect()
         {
+            int port = Properties.Settings.Default.FlightInfoPort;
+
             //open info channel
-            if (tcpServer != null)
+            if (tcpServer.IsConnected())
             {
-                tcpServer.StopListening();
-                tcpServer.clientConnected -= OnSimulatorConnected;
+                if (tcpServer.GetPort() == port)
+                {
+                    onUserMessage?.Invoke("Already conected at requested port to info channel");
+                } 
+                else
+                {
+                    tcpServer.StopListening();
+                    tcpServer.Connect(port);
+                }
             }
-            tcpServer = new TcpServer(Properties.Settings.Default.FlightInfoPort);
-            tcpServer.clientConnected += OnSimulatorConnected;
-            tcpServer.clientDisconnected += OnSimulatorDisconnected;
-            tcpServer.StartClientsListening(FlightBoardModel.Instance.ParamsChanged);
+            else
+            {
+                tcpServer.Connect(port);
+            }
 
             //open command channel
 
-            if(tcpClient != null)
+            if(tcpClient.IsConnected())
             {
                 tcpClient.CloseClient();
             }
-            tcpClient = new TcpClientSimulator(Properties.Settings.Default.FlightServerIP,
+            tcpClient .Connect(Properties.Settings.Default.FlightServerIP,
                 Properties.Settings.Default.FlightCommandPort);
+
             
+
+        }
+
+        private void OnServerFailedToOpen()
+        {
+            onUserMessage?.Invoke("failed to open info channel");
         }
 
         private void OnSimulatorDisconnected()
@@ -79,14 +107,19 @@ namespace FlightSimulator.Model
         }
 
 
-        private void OnManualSend(string message)
+        private void OnClientEventHandler(string message)
+        {
+            onUserMessage?.Invoke(message);
+        }
+
+        private bool OnManualSend(string message)
         {
             if(tcpClient == null)
             {
-                return;
+                return false;
             }
 
-            tcpClient.SendMessage(message);
+            return tcpClient.SendMessage(message);
         }
 
       
@@ -102,6 +135,11 @@ namespace FlightSimulator.Model
             {
                 tcpClient.CloseClient();
             }
+        }
+
+        public void RequestToCloseSettings()
+        {
+            onSettingCloseRequest?.Invoke();
         }
     }
 }

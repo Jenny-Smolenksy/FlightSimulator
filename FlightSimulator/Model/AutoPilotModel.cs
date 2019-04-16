@@ -8,7 +8,7 @@ namespace FlightSimulator.Model
 {
     public class AutoPilotModel
     {
-        public delegate void OnMessageRequest(string message);
+        public delegate bool OnMessageRequest(string message);
         public event OnMessageRequest onMessageRequest;
 
         #region Singleton
@@ -26,9 +26,11 @@ namespace FlightSimulator.Model
         }
         #endregion
 
-        public void SendMessage(string message)
+        public bool SendMessage(string message)
         {
-            onMessageRequest?.Invoke(message);
+            if (onMessageRequest == null)
+                return false;
+            return onMessageRequest(message);
         }
     }
 }

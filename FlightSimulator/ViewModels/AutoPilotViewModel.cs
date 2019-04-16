@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -54,9 +56,17 @@ namespace FlightSimulator.ViewModels
 
         private void SendText()
         {
-            IsSent = true;
+            bool sentFlag = true;
             //go thought the lines, send each line alone
-            model.SendMessage(Text);
+            string[] commands = Regex.Split(Text, @"\r\n");
+            for (int i = 0; i < commands.Length; i++)
+            {
+                if (commands[i] == String.Empty)
+                    continue;
+                sentFlag &= model.SendMessage(commands[i]);
+                Thread.Sleep(2);
+            }
+            IsSent = sentFlag;
         }
 
         #region Commands

@@ -5,9 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlightSimulator"
         xmlns:views="clr-namespace:FlightSimulator.Views"
-        mc:Ignorable="d" Height="550" Width="800" FontFamily="Comic Sans MS"
+        mc:Ignorable="d" Height="550" Width="900" FontFamily="Comic Sans MS"
         xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
-        Background="#262626" Title="FlightGear Simulator" >
+        Background="#262626" Title="FlightGear Simulator" ResizeMode="CanMinimize" >
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Closing">
             <i:InvokeCommandAction Command="{Binding ClickExitCommand}" />
@@ -30,8 +30,8 @@
             <RowDefinition Height="5*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="55*"/>
-            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="50*"/>
+            <ColumnDefinition Width="50*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="Hilla and Jenny Simulator :)" Grid.Row="0" Grid.ColumnSpan="2" FontSize="30" Foreground="#00a3cc" HorizontalAlignment="Center"/>
         <Grid Grid.Column="0" Grid.Row="1">
@@ -39,13 +39,13 @@
                 <RowDefinition Height="10*"/>
                 <RowDefinition Height="90*"/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="0" Margin="0,10,0,0">
                 <Button Content="Connect" Margin="0,5,20,5" Command="{Binding ClickConnectCommand}"/>
                 <Button Content="Settings" Margin="20,5,0,5" Command="{Binding ClickSettingsCommand}"/>
             </StackPanel>
-            <views:FlightBoard Grid.Row="1" />
+            <views:FlightBoard Grid.Row="1" Margin="0,0,30,0" />
         </Grid>
-        <TabControl Grid.Column="1" Grid.Row="1" Background="#262626" Margin="20,0,0,0">
+        <TabControl Grid.Column="1" Margin="0,10,0,0" Grid.Row="1" Background="#262626">
             <TabItem Header="Manual">
                 <views:manual/>
             </TabItem>
@@ -53,8 +53,8 @@
                 <views:AutoPilot/>
             </TabItem>
         </TabControl>
-        <StackPanel Grid.Row="2" Background="#252930" HorizontalAlignment="Stretch" Margin="0,4,0,0" Grid.ColumnSpan="2">
-        <TextBlock x:Name="Info" Text="{Binding Info}"  Foreground="White" HorizontalAlignment="Center" />
+        <StackPanel Grid.Row="2" Background="LightGray" HorizontalAlignment="Stretch" Margin="0,6,0,0" Grid.ColumnSpan="2">
+        <TextBlock x:Name="Info" Text="{Binding Info}"  Foreground="Black" HorizontalAlignment="Left" Margin="10,0,0,0" />
         </StackPanel>
     </Grid>
 </Window>
