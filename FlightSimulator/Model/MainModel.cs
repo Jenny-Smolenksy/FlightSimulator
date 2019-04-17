@@ -85,9 +85,7 @@ namespace FlightSimulator.Model
                 tcpClient.CloseClient();
             }
             tcpClient .Connect(Properties.Settings.Default.FlightServerIP,
-                Properties.Settings.Default.FlightCommandPort);
-
-            
+                Properties.Settings.Default.FlightCommandPort);           
 
         }
 

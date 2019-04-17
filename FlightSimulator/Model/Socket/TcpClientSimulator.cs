@@ -36,21 +36,20 @@ namespace FlightSimulator.Model.Socket
 
         public bool SendMessage(string message)
         {
-            if (client == null || !client.Connected)
+            if (client == null || client.Connected == false)
             {
                 onClientEvent?.Invoke("socket closed, fail to send command");
                 return false;
             }
             try
             {
-                using (NetworkStream stream = client.GetStream())
-                using (BinaryWriter writer = new BinaryWriter(stream))
-                {
 
-                    writer.Write(message);
-                    onClientEvent?.Invoke("Command succesfully sent to simulator");
-                    return true;
-                }
+                NetworkStream stream = client.GetStream();
+                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(message);
+                stream.Write(bytesToSend, 0, bytesToSend.Length);
+                onClientEvent?.Invoke("Command succesfully sent to simulator");
+                return true;
+                
             } catch {
 
                 onClientEvent?.Invoke("socket closed, fail to send command");

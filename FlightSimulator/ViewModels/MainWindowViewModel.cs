@@ -18,7 +18,7 @@ namespace FlightSimulator.ViewModels
             this.model = MainModel.Instance;
             model.onUserMessage += OnUserMessageRecived;
             model.onSettingCloseRequest += SettingCloseRequestHandle;
-            _info = "welcome to flight simulator, set settings and press ok to connect..";
+            _info = "welcome to flight  simulator, set settings and press ok to connect..";
            
 
         }

@@ -57,7 +57,7 @@ namespace FlightSimulator.Model.Socket
                         clientsList.Add(clientHandler);
                         clientHandler.HandleClient(client);
                     }
-                    catch (SocketException)
+                    catch (Exception)
                     {
                         break;
                     }

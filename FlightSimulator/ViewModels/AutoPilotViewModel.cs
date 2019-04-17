@@ -59,14 +59,20 @@ namespace FlightSimulator.ViewModels
             bool sentFlag = true;
             //go thought the lines, send each line alone
             string[] commands = Regex.Split(Text, @"\r\n");
-            for (int i = 0; i < commands.Length; i++)
+
+            Thread thread = new Thread(delegate ()
             {
-                if (commands[i] == String.Empty)
-                    continue;
-                sentFlag &= model.SendMessage(commands[i]);
-                Thread.Sleep(2);
-            }
-            IsSent = sentFlag;
+                for (int i = 0; i < commands.Length; i++)
+                {
+                    if (commands[i] == String.Empty)
+                        continue;
+                    sentFlag &= model.SendMessage(commands[i]);
+                    Thread.Sleep(2);
+                }
+                IsSent = sentFlag;
+            });
+            thread.Start();
+          
         }
 
         #region Commands
