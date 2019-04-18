@@ -76,7 +76,7 @@ namespace FlightSimulator.ViewModels
         }
         private void OnConnectCommand()
         {
-            Info = "Connecting..";
+            Info = "opening info channel, waiting for simulator to connect..";
             model.Connect();
         }
 

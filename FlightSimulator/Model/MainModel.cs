@@ -77,16 +77,6 @@ namespace FlightSimulator.Model
             {
                 tcpServer.Connect(port);
             }
-
-            //open command channel
-
-            if(tcpClient.IsConnected())
-            {
-                tcpClient.CloseClient();
-            }
-            tcpClient .Connect(Properties.Settings.Default.FlightServerIP,
-                Properties.Settings.Default.FlightCommandPort);           
-
         }
 
         private void OnServerFailedToOpen()
@@ -100,8 +90,27 @@ namespace FlightSimulator.Model
         }
 
         private void OnSimulatorConnected()
-        {
+        { 
+            //open command channel
+
+            if (tcpClient.IsConnected())
+            {
+                tcpClient.CloseClient();
+            }
+            tcpClient.Connect(Properties.Settings.Default.FlightServerIP,
+                Properties.Settings.Default.FlightCommandPort);
+
             onUserMessage?.Invoke("Connected to info channel of simulator");
+
+            //open command channel
+
+            if (tcpClient.IsConnected())
+            {
+                tcpClient.CloseClient();
+            }
+            tcpClient.Connect(Properties.Settings.Default.FlightServerIP,
+                Properties.Settings.Default.FlightCommandPort);
+
         }
 
 
