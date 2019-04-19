@@ -30,8 +30,9 @@ namespace FlightSimulator.Model.Socket
                 onClientEvent?.Invoke("Conncted to simulator, commands channel");
             } catch(SocketException)
             {
-                onClientEvent?.Invoke("Error Conncted to simulator in commands channel, check port");
+                //onClientEvent?.Invoke("Error Conncted to simulator in commands channel, check port");
             }
+           
         }
 
         public bool SendMessage(string message)
@@ -44,9 +45,11 @@ namespace FlightSimulator.Model.Socket
             try
             {
 
+                Byte[] data = System.Text.Encoding.ASCII.GetBytes(message + "\r\n");
                 NetworkStream stream = client.GetStream();
-                byte[] bytesToSend = ASCIIEncoding.ASCII.GetBytes(message);
-                stream.Write(bytesToSend, 0, bytesToSend.Length);
+                stream.Write(data, 0, data.Length);
+               // stream.Flush();
+                
                 onClientEvent?.Invoke("Command succesfully sent to simulator");
                 return true;
                 
