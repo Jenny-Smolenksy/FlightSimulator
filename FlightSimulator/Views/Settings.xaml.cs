@@ -25,6 +25,7 @@ namespace FlightSimulator.Views
 
         public Settings()
         {
+            //set context to view model
             InitializeComponent();
             viewModel = new SettingsWindowViewModel(ApplicationSettingsModel.Instance);
             this.DataContext = viewModel;

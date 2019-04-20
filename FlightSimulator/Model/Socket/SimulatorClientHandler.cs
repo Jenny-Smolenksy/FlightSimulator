@@ -12,9 +12,15 @@ namespace FlightSimulator.Model.Socket
 {
     public class SimulatorClientHandler : IClientHandler
     {
+        #region events
         public event ParamsChanged _onParamsChanged;
         public event ServerEvent clientDisconnected;
-
+        #endregion
+        #region Implementations
+        /// <summary>
+        /// handle connecting client
+        /// </summary>
+        /// <param name="client"></param>
         public void HandleClient(TcpClient client)
         {
             new Task(() =>
@@ -25,25 +31,29 @@ namespace FlightSimulator.Model.Socket
                     using (StreamReader reader = new StreamReader(stream))
                     {
                         string inputLine;
+                        //check if client is connected
                         while (client.Connected)
                         {
+                            //read a line from client
                             inputLine = reader.ReadLine();
                             string[] values = inputLine.Split(',');
+                            //get the params needed
                             double lon = Convert.ToDouble(values[0]);
                             double lat = Convert.ToDouble(values[1]);
-
+                            //raise event
                             _onParamsChanged?.Invoke(lon, lat);
-                            //Console.WriteLine("Got command: {0}", commandLine);
-                            //split by generic and send lat and lon to flight board
                         }
+                        //raise event
                         clientDisconnected?.Invoke();
-
                     }
-                } catch(Exception) { clientDisconnected?.Invoke(); }
+                } catch(Exception)
+                {
+                    //raise event for error
+                    clientDisconnected?.Invoke(); }
                 
                 //client.Close();
             }).Start();
         }
-        
+        #endregion
     }
 }

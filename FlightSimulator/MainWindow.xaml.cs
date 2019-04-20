@@ -23,11 +23,10 @@ namespace FlightSimulator
         private MainWindowViewModel viewModel;
         public MainWindow()
         {
+            //set context to view model
             viewModel = new MainWindowViewModel();
             this.DataContext = viewModel;
             InitializeComponent();
-
-
         }
 
     }

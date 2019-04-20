@@ -10,7 +10,10 @@ namespace FlightSimulator.ViewModels
     public abstract class BaseNotify : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /// <summary>
+        /// raise changed propety event
+        /// </summary>
+        /// <param name="propName"></param>
         public void NotifyPropertyChanged(string propName)
         {
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propName));

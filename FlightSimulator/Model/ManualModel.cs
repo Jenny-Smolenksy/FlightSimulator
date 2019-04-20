@@ -11,7 +11,6 @@ namespace FlightSimulator.Model
         public delegate bool valueChanged( string msg);
         public event valueChanged valueChange;
 
-
         #region Singleton
         private static ManualModel m_Instance = null;
         public static ManualModel Instance
@@ -27,11 +26,14 @@ namespace FlightSimulator.Model
         }
         #endregion
 
+        /// <summary>
+        /// send message about new values
+        /// </summary>
+        /// <param name="msg"></param>
         public void SendValueMessage( string msg)
         {
+            //raise event to send message
             valueChange?.Invoke(msg);
         }
-
-
     }
 }

@@ -13,12 +13,15 @@ namespace FlightSimulator.ViewModels.Windows
     public class SettingsWindowViewModel : BaseNotify
     {
         private ISettingsModel model;
-
+        /// <summary>
+        /// constuctor
+        /// </summary>
+        /// <param name="model"></param>
         public SettingsWindowViewModel(ISettingsModel model)
         {
             this.model = model;
         }
-
+        #region Properties
         public string FlightServerIP
         {
             get { return model.FlightServerIP; }
@@ -47,13 +50,19 @@ namespace FlightSimulator.ViewModels.Windows
                 model.FlightInfoPort = value;
                 NotifyPropertyChanged("FlightInfoPort");
             }
-        }     
+        }
+        #endregion
 
+        /// <summary>
+        /// save configs
+        /// </summary>
         public void SaveSettings()
         {
             model.SaveSettings();
         }
-
+        /// <summary>
+        /// reload config from previous time
+        /// </summary>
         public void ReloadSettings()
         {
             model.ReloadSettings();
@@ -61,6 +70,9 @@ namespace FlightSimulator.ViewModels.Windows
 
         #region Commands
         #region ClickCommand
+        /// <summary>
+        /// click command
+        /// </summary>
         private ICommand _clickCommand;
         public ICommand ClickCommand
         {
@@ -69,6 +81,9 @@ namespace FlightSimulator.ViewModels.Windows
                 return _clickCommand ?? (_clickCommand = new CommandHandler(() => OnClick()));
             }
         }
+        /// <summary>
+        /// handle click
+        /// </summary>
         private void OnClick()
         {
             model.SaveSettings();
@@ -85,6 +100,9 @@ namespace FlightSimulator.ViewModels.Windows
                 return _cancelCommand ?? (_cancelCommand = new CommandHandler(() => OnCancel()));
             }
         }
+        /// <summary>
+        /// handle cancel
+        /// </summary>
         private void OnCancel()
         {
             model.ReloadSettings();

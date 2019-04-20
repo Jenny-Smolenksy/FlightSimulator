@@ -25,7 +25,11 @@ namespace FlightSimulator.Model
             }
         }
         #endregion
-
+        /// <summary>
+        /// send message to server
+        /// </summary>
+        /// <param name="message"></param>
+        /// <returns></returns>
         public bool SendMessage(string message)
         {
             if (onMessageRequest == null)

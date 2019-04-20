@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace FlightSimulator.Model.EventArgs
 {
+    /// <summary>
+    /// arguments for joystick event
+    /// </summary>
     public class VirtualJoystickEventArgs
     {
         public double Aileron { get; set; }

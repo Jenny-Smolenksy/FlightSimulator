@@ -11,6 +11,7 @@ namespace FlightSimulator.Model.Socket
 {
     public class TcpServer
     {
+        #region params
         private TcpListener listener;
         private List<SimulatorClientHandler> clientsList;
         public delegate void ParamsChanged(double lon, double lat);
@@ -19,13 +20,14 @@ namespace FlightSimulator.Model.Socket
         public event ServerEvent clientDisconnected;
         public event ServerEvent failedToOpen;
         public event ParamsChanged onClientHandlerParamsChanged;
-
-        public TcpServer()
-        {
-        }
-
+        #endregion
+        /// <summary>
+        /// open local server on give port
+        /// </summary>
+        /// <param name="port"></param>
         public void Connect(int port)
         {
+            //get ip address
             IPEndPoint ep = new IPEndPoint(IPAddress.Parse("127.0.0.1"), port);
             listener = new TcpListener(ep);
             //opening server
@@ -38,9 +40,10 @@ namespace FlightSimulator.Model.Socket
                 failedToOpen?.Invoke();
             }
             clientsList = new List<SimulatorClientHandler>();
-        }
-        
-
+        }        
+        /// <summary>
+        /// manage income clients
+        /// </summary>
         private void StartClientsListening()
         {
             Thread thread = new Thread(() => {
@@ -50,7 +53,7 @@ namespace FlightSimulator.Model.Socket
                     {
                         TcpClient client = listener.AcceptTcpClient();
                         clientConnected?.Invoke();
-
+                        //handle incomming client
                         SimulatorClientHandler clientHandler = new SimulatorClientHandler();
                         clientHandler._onParamsChanged += ClientHandlerParamsChanged;
                         clientHandler.clientDisconnected += this.clientDisconnected;
@@ -62,29 +65,40 @@ namespace FlightSimulator.Model.Socket
                         break;
                     }
                 }
-                //Console.WriteLine("Server stopped");
             });
             thread.Start();
         }
-
+        /// <summary>
+        /// handle message from client
+        /// </summary>
+        /// <param name="lon"></param>
+        /// <param name="lat"></param>
         private void ClientHandlerParamsChanged(double lon, double lat)
         {
             onClientHandlerParamsChanged?.Invoke(lon, lat);
         }
-
+        /// <summary>
+        /// check if connected
+        /// </summary>
+        /// <returns></returns>
         public bool IsConnected()
         {
             if (listener == null)
                 return false;
             return listener.Server.Connected;
         }
-
+        /// <summary>
+        /// stop server
+        /// </summary>
         public void StopListening()
         {
             if (IsConnected())
               listener.Stop();
         }
-
+        /// <summary>
+        /// get server port
+        /// </summary>
+        /// <returns></returns>
         public int GetPort()
         {
             if (!IsConnected()) return -1;

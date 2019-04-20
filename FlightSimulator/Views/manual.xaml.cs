@@ -26,20 +26,11 @@ namespace FlightSimulator.Views
         public manual()
         {
             InitializeComponent();
+            //set context to view model
             viewModel = new ViewModels.ManualViewModel();
             this.DataContext = viewModel;
-            this.Joystick.Moved += viewModel.Joystick_Moved;
-            
-        }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-
-        }
-
-        private void Throttle_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-
+            //signed to event
+            this.Joystick.Moved += viewModel.Joystick_Moved;            
         }
     }
 }

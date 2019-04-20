@@ -13,12 +13,17 @@ namespace FlightSimulator.ViewModels
     class AutoPilotViewModel : BaseNotify
     {
         private AutoPilotModel model;
+        /// <summary>
+        /// constructor
+        /// </summary>
         public AutoPilotViewModel()
         {
+            //connect to model
             model = AutoPilotModel.Instance;
+            //initialize params
             IsSent = false;
         }
-
+        #region Properties
         private bool _isSent;
         public bool IsSent
         {
@@ -47,28 +52,37 @@ namespace FlightSimulator.ViewModels
                 }
             }
         }
-
-
+        #endregion
+        /// <summary>
+        /// clear text from view
+        /// </summary>
         private void ClearText()
         {
             Text = "";
         }
-
+        /// <summary>
+        /// send writen text to simulator
+        /// </summary>
         private void SendText()
         {
             bool sentFlag = true;
-            //go thought the lines, send each line alone
+            //get line breaks
             string[] commands = Regex.Split(Text, @"\r\n");
-
+            //create new thread
             Thread thread = new Thread(delegate ()
             {
+                //go thought the lines, send each line alone
                 for (int i = 0; i < commands.Length; i++)
                 {
+                    //case empty line
                     if (commands[i] == String.Empty)
                         continue;
+                    //send message to simulator
                     sentFlag &= model.SendMessage(commands[i]);
+                    //wait 2 seconds
                     Thread.Sleep(2);
                 }
+                //check if info sent
                 IsSent = sentFlag;
             });
             thread.Start();
@@ -76,6 +90,9 @@ namespace FlightSimulator.ViewModels
         }
 
         #region Commands
+        /// <summary>
+        /// click ok command
+        /// </summary>
         private ICommand _clickOkCommand;
         public ICommand ClickOkCommand
         {
@@ -84,7 +101,9 @@ namespace FlightSimulator.ViewModels
                 return _clickOkCommand ?? (_clickOkCommand = new CommandHandler(() => SendText()));
             }
         }
-        
+        /// <summary>
+        /// click clear command
+        /// </summary>
         private ICommand _clearCommand;
         public ICommand ClearCommand
         {

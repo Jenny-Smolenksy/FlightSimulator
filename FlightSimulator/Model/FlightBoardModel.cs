@@ -27,6 +27,7 @@ namespace FlightSimulator.Model
         }
         #endregion
 
+        #region Properties
         private double _lon;
         public double Lon
         {
@@ -41,7 +42,13 @@ namespace FlightSimulator.Model
         {
             get; set;
         }
+        #endregion
 
+        /// <summary>
+        /// params change handle
+        /// </summary>
+        /// <param name="lon"></param>
+        /// <param name="lat"></param>
         public void ParamsChanged(double lon, double lat)
         {
             this.Lat = lat;

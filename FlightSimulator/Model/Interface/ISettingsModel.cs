@@ -12,7 +12,13 @@ namespace FlightSimulator.Model.Interface
         int FlightInfoPort { get; set; }           // The Port of the Flight Server
         int FlightCommandPort { get; set; }           // The Port of the Flight Server
 
+        /// <summary>
+        /// save settings
+        /// </summary>
         void SaveSettings();
+        /// <summary>
+        /// reload previous config
+        /// </summary>
         void ReloadSettings();
     }
 }

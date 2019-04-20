@@ -23,6 +23,7 @@ namespace FlightSimulator.Model
             }
         }
         #endregion
+        #region Properties
         public string FlightServerIP
         {
             get { return Properties.Settings.Default.FlightServerIP; }
@@ -39,12 +40,17 @@ namespace FlightSimulator.Model
             get { return Properties.Settings.Default.FlightInfoPort; }
             set { Properties.Settings.Default.FlightInfoPort = value; }
         }
-
+        #endregion
+        /// <summary>
+        /// save settings
+        /// </summary>
         public void SaveSettings()
         {
             Properties.Settings.Default.Save();
         }
-
+        /// <summary>
+        /// get previous settings
+        /// </summary>
         public void ReloadSettings()
         {
             Properties.Settings.Default.Reload();
